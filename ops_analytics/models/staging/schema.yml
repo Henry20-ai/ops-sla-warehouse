@@ -1,0 +1,15 @@
+version: 2
+
+models:
+  - name: stg_tickets
+    description: "Cleaned staging model of raw support ticket data, with resolution time calculated in hours."
+    columns:
+      - name: ticket_id
+        description: "Unique identifier for each support ticket."
+        tests:
+          - unique
+          - not_null
+
+      - name: customer_name
+        tests:
+          - not_null

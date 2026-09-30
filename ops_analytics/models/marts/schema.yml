@@ -1,0 +1,32 @@
+version: 2
+
+models:
+  - name: fct_ticket_sla
+    description: "Fact table showing SLA status for each support ticket, with breach flagging."
+    columns:
+      - name: ticket_id
+        description: "Unique identifier for each support ticket."
+        tests:
+          - unique
+          - not_null
+
+      - name: priority
+        description: "Ticket priority level."
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Low', 'Medium', 'High', 'Urgent']
+
+      - name: status
+        description: "Current status of the ticket."
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Open', 'In Progress', 'Resolved', 'Closed']
+
+      - name: sla_status
+        description: "Whether the ticket breached, met, or is still open against its SLA target."
+        tests:
+          - accepted_values:
+              arguments:
+                values: ['Breached', 'Met SLA', 'Still Open']
